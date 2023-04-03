@@ -10,11 +10,6 @@ const { searchForm, gallery, loadMoreBtn, messageEl } = {
   messageEl: document.querySelector('.message'),
 };
 
-// const searchFormEl = document.querySelector('#search-form');
-// const galleryEl = document.querySelector('.gallery');
-// const loadMoreBtnEl = document.querySelector('.load-more');
-// const messageEl = document.querySelector('.message');
-
 let searchQuery = '';
 let page = 1;
 let totalImages;
