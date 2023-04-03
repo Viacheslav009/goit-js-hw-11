@@ -2,18 +2,16 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import { getImages } from './js/fetchImages';
-import throttle from 'lodash.throttle';
 
 const searchFormEl = document.querySelector('#search-form');
 const galleryEl = document.querySelector('.gallery');
 const loadMoreBtnEl = document.querySelector('.load-more');
 const messageEl = document.querySelector('.message');
-// const scrollUpBtnEl = document.querySelector('.scroll-up-btn');
 
 let searchQuery = '';
 let page = 1;
 let totalImages;
-const TIME = 1000;
+
 let lightbox;
 
 searchFormEl.addEventListener('submit', handleSearchFormSubmit);
@@ -21,8 +19,6 @@ loadMoreBtnEl.addEventListener('click', handleLoadMoreBtnClick);
 galleryEl.addEventListener('click', event => {
   event.preventDefault();
 });
-scrollUpBtnEl.addEventListener('click', handleScrollUpBth);
-document.addEventListener('scroll', throttle(handleScroll, TIME));
 
 async function handleSearchFormSubmit(event) {
   event.preventDefault();
@@ -130,29 +126,3 @@ function createPhotoCardMarkup({
       </a>
       `;
 }
-
-// function scroll() {
-//   const { height: cardHeight } = document
-//     .querySelector('.gallery')
-//     .firstElementChild.getBoundingClientRect();
-
-//   window.scrollBy({
-//     top: cardHeight * 2,
-//     behavior: 'smooth',
-//   });
-// }
-// function handleScrollUpBth() {
-//   window.scrollTo({
-//     top: 0,
-//     behavior: 'smooth',
-//   });
-// }
-// function handleScroll() {
-//   let lastScroll = window.innerHeight;
-
-//   if (lastScroll < document.documentElement.scrollTop) {
-//     scrollUpBtnEl.classList.remove('invisible');
-//   } else {
-//     scrollUpBtnEl.classList.add('invisible');
-//   }
-// }
