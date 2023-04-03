@@ -3,10 +3,17 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import { getImages } from './js/fetchImages';
 
-const searchFormEl = document.querySelector('#search-form');
-const galleryEl = document.querySelector('.gallery');
-const loadMoreBtnEl = document.querySelector('.load-more');
-const messageEl = document.querySelector('.message');
+const { searchForm, gallery, loadMoreBtn, messageEl } = {
+  searchForm: document.querySelector('#search-form'),
+  gallery: document.querySelector('.gallery'),
+  loadMoreBtn: document.querySelector('.load-more'),
+  messageEl: document.querySelector('.message'),
+};
+
+// const searchFormEl = document.querySelector('#search-form');
+// const galleryEl = document.querySelector('.gallery');
+// const loadMoreBtnEl = document.querySelector('.load-more');
+// const messageEl = document.querySelector('.message');
 
 let searchQuery = '';
 let page = 1;
@@ -14,20 +21,20 @@ let totalImages;
 
 let lightbox;
 
-searchFormEl.addEventListener('submit', handleSearchFormSubmit);
-loadMoreBtnEl.addEventListener('click', handleLoadMoreBtnClick);
-galleryEl.addEventListener('click', event => {
+searchForm.addEventListener('submit', handleSearchFormSubmit);
+loadMoreBtn.addEventListener('click', handleLoadMoreBtnClick);
+gallery.addEventListener('click', event => {
   event.preventDefault();
 });
 
 async function handleSearchFormSubmit(event) {
   event.preventDefault();
 
-  loadMoreBtnEl.classList.add('is-hidden');
+  loadMoreBtn.classList.add('is-hidden');
   messageEl.classList.add('is-hidden');
 
   page = 1;
-  searchQuery = searchFormEl.elements.searchQuery.value.trim();
+  searchQuery = searchForm.elements.searchQuery.value.trim();
   if (!searchQuery) {
     return;
   }
@@ -39,7 +46,7 @@ async function handleSearchFormSubmit(event) {
       Notify.failure(
         'Sorry, there are no images matching your search query. Please try again.'
       );
-      galleryEl.innerHTML = '';
+      gallery.innerHTML = '';
       return;
     }
 
@@ -49,13 +56,13 @@ async function handleSearchFormSubmit(event) {
       .map(img => createPhotoCardMarkup(img))
       .join('');
 
-    galleryEl.innerHTML = galleryMarkup;
-    loadMoreBtnEl.classList.remove('is-hidden');
+    gallery.innerHTML = galleryMarkup;
+    loadMoreBtn.classList.remove('is-hidden');
     totalImages = response.data.hits.length;
 
     if (totalImages >= response.data.totalHits) {
-      loadMoreBtnEl.classList.add('is-hidden');
-      messageEl.classList.remove('is-hidden');
+      loadMoreBtn.classList.add('is-hidden');
+      messageEL.classList.remove('is-hidden');
     }
   } catch (error) {
     console.log(error);
@@ -64,7 +71,7 @@ async function handleSearchFormSubmit(event) {
 }
 
 async function handleLoadMoreBtnClick() {
-  loadMoreBtnEl.setAttribute('disabled', true);
+  loadMoreBtn.setAttribute('disabled', true);
 
   page += 1;
   totalImages += 40;
@@ -76,11 +83,11 @@ async function handleLoadMoreBtnClick() {
       .map(img => createPhotoCardMarkup(img))
       .join('');
 
-    galleryEl.insertAdjacentHTML('beforeend', galleryMarkup);
-    loadMoreBtnEl.disabled = false;
+    gallery.insertAdjacentHTML('beforeend', galleryMarkup);
+    loadMoreBtn.disabled = false;
 
     if (totalImages >= response.data.totalHits) {
-      loadMoreBtnEl.classList.add('is-hidden');
+      loadMoreBtn.classList.add('is-hidden');
       messageEl.classList.remove('is-hidden');
     }
   } catch (error) {
