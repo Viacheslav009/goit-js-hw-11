@@ -118,7 +118,7 @@ body {
   background-color: rgba(19, 211, 83, 0.7);
   cursor: pointer;
 
-  @include transition(transform, opacity);
+  //   @include transition(transform, opacity);
 }
 .invisible {
   opacity: 0;
