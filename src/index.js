@@ -8,12 +8,12 @@ const searchFormEl = document.querySelector('#search-form');
 const galleryEl = document.querySelector('.gallery');
 const loadMoreBtnEl = document.querySelector('.load-more');
 const messageEl = document.querySelector('.message');
-const scrollUpBtnEl = document.querySelector('.scroll-up-btn');
+// const scrollUpBtnEl = document.querySelector('.scroll-up-btn');
 
 let searchQuery = '';
 let page = 1;
 let totalImages;
-const PAGINATION = 40;
+const TIME = 1000;
 let lightbox;
 
 searchFormEl.addEventListener('submit', handleSearchFormSubmit);
@@ -22,7 +22,7 @@ galleryEl.addEventListener('click', event => {
   event.preventDefault();
 });
 scrollUpBtnEl.addEventListener('click', handleScrollUpBth);
-document.addEventListener('scroll', throttle(handleScroll, 1000));
+document.addEventListener('scroll', throttle(handleScroll, TIME));
 
 async function handleSearchFormSubmit(event) {
   event.preventDefault();
@@ -37,7 +37,7 @@ async function handleSearchFormSubmit(event) {
   }
 
   try {
-    const response = await getImages(searchQuery, page, PAGINATION);
+    const response = await getImages(searchQuery, page, 40);
 
     if (response.data.hits.length === 0) {
       Notify.failure(
@@ -71,10 +71,10 @@ async function handleLoadMoreBtnClick() {
   loadMoreBtnEl.setAttribute('disabled', true);
 
   page += 1;
-  totalImages += PAGINATION;
+  totalImages += 40;
 
   try {
-    const response = await getImages(searchQuery, page, PAGINATION);
+    const response = await getImages(searchQuery, page, 40);
 
     const galleryMarkup = response.data.hits
       .map(img => createPhotoCardMarkup(img))
@@ -131,28 +131,28 @@ function createPhotoCardMarkup({
       `;
 }
 
-function scroll() {
-  const { height: cardHeight } = document
-    .querySelector('.gallery')
-    .firstElementChild.getBoundingClientRect();
+// function scroll() {
+//   const { height: cardHeight } = document
+//     .querySelector('.gallery')
+//     .firstElementChild.getBoundingClientRect();
 
-  window.scrollBy({
-    top: cardHeight * 2,
-    behavior: 'smooth',
-  });
-}
-function handleScrollUpBth() {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth',
-  });
-}
-function handleScroll() {
-  let lastScroll = window.innerHeight;
+//   window.scrollBy({
+//     top: cardHeight * 2,
+//     behavior: 'smooth',
+//   });
+// }
+// function handleScrollUpBth() {
+//   window.scrollTo({
+//     top: 0,
+//     behavior: 'smooth',
+//   });
+// }
+// function handleScroll() {
+//   let lastScroll = window.innerHeight;
 
-  if (lastScroll < document.documentElement.scrollTop) {
-    scrollUpBtnEl.classList.remove('invisible');
-  } else {
-    scrollUpBtnEl.classList.add('invisible');
-  }
-}
+//   if (lastScroll < document.documentElement.scrollTop) {
+//     scrollUpBtnEl.classList.remove('invisible');
+//   } else {
+//     scrollUpBtnEl.classList.add('invisible');
+//   }
+// }

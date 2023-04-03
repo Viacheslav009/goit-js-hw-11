@@ -12,8 +12,8 @@ body {
   padding: 15px;
   border-radius: 10px;
   text-align: center;
-  box-shadow: rgba(106, 44, 124, 0.25) 0px 30px 60px -12px inset,
-    rgba(53, 26, 53, 0.3) 0px 18px 36px -18px inset;
+  box-shadow: rgba(7, 116, 43, 0.25) 0px 30px 60px -12px inset,
+    rgba(3, 71, 24, 0.3) 0px 18px 36px -18px inset;
 }
 .search-form__label {
   position: relative;
@@ -23,8 +23,8 @@ body {
   border-radius: 10px;
   width: 300px;
   border: none;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  box-shadow: rgba(7, 155, 61, 0.25) 0px 2px 5px -1px,
+    rgba(5, 224, 41, 0.3) 0px 1px 3px -1px;
 }
 .search-form__icon {
   position: absolute;
@@ -35,7 +35,7 @@ body {
   padding: 10px;
   border-radius: 10px;
   border: none;
-  background-color: rgb(201, 164, 201);
+  background-color: rgb(88, 128, 214);
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
     rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   cursor: pointer;
@@ -43,7 +43,7 @@ body {
 
   &:hover,
   &:focus {
-    background-color: rgb(174, 140, 174);
+    background-color: rgb(15, 192, 68);
   }
 }
 .load-more {
@@ -115,7 +115,7 @@ body {
   width: 40px;
   height: 40px;
 
-  background-color: rgba(201, 164, 201, 0.7);
+  background-color: rgba(19, 211, 83, 0.7);
   cursor: pointer;
 
   @include transition(transform, opacity);
